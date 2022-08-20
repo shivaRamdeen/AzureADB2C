@@ -186,7 +186,7 @@ class Provider extends AbstractProvider
             }
 
             // signature validation and return claims
-            return (array) JWT::decode($idToken, JWK::parseKeySet($this->getJWTKeys()), $this->getOpenIdConfiguration()->id_token_signing_alg_values_supported);
+            return (array) JWT::decode($idToken, JWK::parseKeySet($this->getJWTKeys(), "RS256"), $this->getOpenIdConfiguration()->id_token_signing_alg_values_supported);
         } catch (Exception $ex) {
             throw new InvalidStateException("Error on validationg id_token. {$ex}");
         }
